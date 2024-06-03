@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pluma News</title>
+
+    <link rel="stylesheet" href="app/style.css">
+    <link rel="shortcut icon" href="img/logo_image.png" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+<nav class="sidebar close">
+    <header>
+        <div class="image-text">
+            <span class="image">
+                <img src="img/logo_image.png" alt="">
+            </span>
+
+            <div class="text logo-text">
+                <span class="name">Pluma News</span>    
+            </div>
+        </div>
+
+        <i class='bx bx-chevron-right toggle' style="background-color: red;"></i>
+    </header>
+
+    <div class="menu-bar">
+        <div class="menu">
+            <ul class="menu-links">
+                <li class="nav-link">
+                    <a href="#" data-page="1">
+                        <i class='bx bx-home-alt icon' ></i>
+                        <span class="text nav-text">Home</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#" data-page="2">
+                        <i class='bx bx-news icon' ></i>
+                        <span class="text nav-text">News</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#" data-page="3">
+                        <i class='bx bx-cloud icon'></i>
+                        <span class="text nav-text">Weather today</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#" data-page="4">
+                        <i class='bx bx-question-mark icon' ></i>
+                        <span class="text nav-text">Tentative API</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#" data-page="5">
+                        <i class='bx bx-heart icon' ></i>
+                        <span class="text nav-text">About Us</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="bottom-content">
+            <li class="mode">
+                <div class="sun-moon">
+                    <i class='bx bx-moon icon moon'></i>
+                    <i class='bx bx-sun icon sun'></i>
+                </div>
+                <span class="mode-text text">Dark mode</span>
+
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+            </li>
+        </div>
+    </div>
+</nav>
+
+<section class="home" id="page1">
+    <div class="text">
+
+        <div class="search-container">
+            <input type="search" placeholder="Enter Location..." id="search-box"></input>
+            <button type="submit" id="search" onclick="showWeather()">
+            <i class="fa fa-search" aria-hidden="true" ></i> 
+        </div>
+
+        <div class="widget1-container">
+            
+            <div class="widget1">
+                <p id="weather-info"></p>
+            </div>
+
+            <h1>5-day weather forecast</h1>
+            
+            <div class="widget2-container">
+                <div class="widget2">
+                    <img src="#" alt="img">
+            </div>
+            <div class="forecast-container">
+                <div class="forecast">
+                    <p id="forecast-info"></p>
+                </div>
+                <div class="forecast">
+                    <p id="forecast-info"></p>
+                </div>
+                <div class="forecast">
+                    <p id="forecast-info"></p>
+                </div>
+                <div class="forecast">
+                    <p id="forecast-info"></p>
+                </div>
+                <div class="forecast">
+                    <p id="forecast-info"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="home" id="page2">
+    <div class="text">News</div>
+</section>
+
+<section class="home" id="page3">
+    <div class="text">Weather Today</div>
+</section>
+
+<section class="home" id="page4">
+    <div class="text">Tentative API</div>
+</section>
+
+<section class="home" id="page5">
+    <div class="text">About Us</div>
+</section>
+
+<script src="app/script.js"></script>
+
+</body>
+
+</html>
