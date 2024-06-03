@@ -1,31 +1,219 @@
-const url = 'https://api.openweathermap.org/data/2.5/weather';
-const apiKey = 'f00c38e0279b7bc85480c3fe775d518c';
+document.addEventListener('DOMContentLoaded', () => {
+    const body = document.querySelector('body');
+    const sidebar = body.querySelector('nav');
+    const toggle = body.querySelector(".toggle");
+    const searchBtn = body.querySelector(".search-box");
+    const modeSwitch = body.querySelector(".toggle-switch");
+    const modeText = body.querySelector(".mode-text");
 
-$(document).ready(function () {
-    weatherFn('Mabalacat');
-});
+    toggle.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+    });
 
-async function weatherFn(cName) {
-    const temp = `${url}?q=${cName}&appid=${apiKey}&units=metric`;
-    try {
-        const res = await fetch(temp);
-        const data = await res.json();
-        if (res.ok) {
-            weatherShowFn(data);
+    modeSwitch.addEventListener("click", () => {
+        body.classList.toggle("dark");
+
+        if (body.classList.contains("dark")) {
+            modeText.innerText = "Light mode";
         } else {
-            alert('City not found. Please try again.');
+            modeText.innerText = "Dark mode";
         }
-    } catch (error) {
-        console.error('Error fetching weather data:', error);
-    }
-}
+    });
 
-function weatherShowFn(data) {
-    $('#city-name').text(data.name);
-    $('#date').text(moment().format('MMMM Do YYYY, h:mm:ss a'));
-    $('#temperature').html(`${data.main.temp}°C`);
-    $('#description').text(data.weather[0].description);
-    $('#wind-speed').html(`Wind Speed: ${data.wind.speed} m/s`);
-    $('#weather-icon').attr('src', `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
-    $('#weather-info').fadeIn();
-}
+    const menuLinks = document.querySelectorAll('.menu-links a');
+    const sections = document.querySelectorAll('section.home');
+
+    function showPage(pageId) {
+        sections.forEach(section => {
+            section.style.display = 'none';
+        });
+        document.getElementById(`page${pageId}`).style.display = 'block';
+    }
+
+    menuLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const pageId = link.getAttribute('data-page');
+            showPage(pageId);
+        });
+    });
+
+    showPage(1);
+
+    const apiKey = 'f00c38e0279b7bc85480c3fe775d518c';
+
+    async function showWeather(city) {
+        try {
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+
+            if (!response.ok) {
+                if (response.status === 404) {
+                    throw new Error('Location not found. Please try another location.');
+                } else if (response.status === 401) {
+                    throw new Error('Invalid API key. Please check your API key.');
+                } else {
+                    throw new Error('Could not fetch resource. Please try again later.');
+                }
+            }
+
+            const data = await response.json();
+            const weatherDescription = data.weather[0].description;
+            const temperature = data.main.temp;
+            const location = data.name;
+            const wind = data.wind.speed;
+
+            const weatherInfo = document.getElementById('weather-info');
+            weatherInfo.innerHTML = `<strong>Location:</strong> ${location}<br>
+                                    <strong>Weather:</strong> ${weatherDescription}<br>
+                                    <strong>Temperature:</strong> ${temperature}°C<br>
+                                    <strong>Wind:</strong> ${wind} mph`;
+            weatherInfo.style.display = 'block';
+            console.log(data);
+
+        } catch (error) {
+            const weatherInfo = document.getElementById('weather-info');
+            weatherInfo.innerHTML = `<div style="padding: 20px; margin-top: 10px; background-color: red; color: white; border-radius: 10px; font-size: 18px; max-width: 300px; justify-content='center' ">
+                                        <strong>Error:</strong> ${error.message}
+                                     </div>`;
+            weatherInfo.style.display = 'block';
+            console.error(error);
+        }
+    }
+
+    async function fivedayForecast(city) {
+        const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (response.ok) {
+                const forecastContainer = document.querySelector('.forecast-container');
+                forecastContainer.innerHTML = '';
+
+                for (let i = 0; i < data.list.length; i += 8) {
+                    const forecast = data.list[i];
+                    const date = new Date(forecast.dt_txt);
+                    const day = date.toLocaleDateString('en-US', { weekday: 'long' });
+                    const temp = forecast.main.temp;
+                    const windSpeed = forecast.wind.speed;
+                    const weatherDescription = forecast.weather[0].description;
+
+                    const forecastEl = document.createElement('div');
+                    forecastEl.classList.add('forecast');
+                    forecastEl.innerHTML = `
+                        <p>${day}</p>
+                        <img src="https://openweathermap.org/img/wn/${forecast.weather[0].icon}.png" alt="Weather icon">
+                        <p>Wind: ${windSpeed} m/s</p>
+                        <p>${weatherDescription}</p>
+                        <p>Temperature: ${temp} °C</p>
+                    `;
+
+                    forecastContainer.appendChild(forecastEl);
+                }
+            } else {
+                alert('City not found');
+            }
+        } catch (error) {
+            console.error('Error fetching the weather data', error);
+        }
+    }
+
+    function showWeatherByCoordinates(lat, lon) {
+        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Weather data could not be retrieved.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const weatherDescription = data.weather[0].description;
+                const temperature = data.main.temp;
+                const location = data.name;
+                const wind = data.wind.speed;
+
+                const weatherInfo = document.getElementById('weather-info');
+                weatherInfo.innerHTML = `<strong>Location:</strong> ${location}<br>
+                                        <strong>Weather:</strong> ${weatherDescription}<br>
+                                        <strong>Temperature:</strong> ${temperature}°C<br>
+                                        <strong>Wind:</strong> ${wind} m/s`;
+                weatherInfo.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error fetching weather data by coordinates:', error);
+                const weatherInfo = document.getElementById('weather-info');
+                weatherInfo.innerHTML = `<div style="padding: 20px; margin-top: 10px; background-color: red; color: white; border-radius: 10px; font-size: 18px; max-width: 300px; justify-content='center' ">
+                                            <strong>Error:</strong> ${error.message}
+                                         </div>`;
+                weatherInfo.style.display = 'block';
+            });
+    }
+
+    function getDeviceLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const { latitude, longitude } = position.coords;
+                showWeatherByCoordinates(latitude, longitude);
+                fivedayForecastByCoordinates(latitude, longitude);
+            }, error => {
+                console.error('Error getting location:', error);
+                alert('Unable to retrieve your location. Please use the search feature.');
+                fivedayForecast('Mabalacat');
+                showWeather('Mabalacat');
+            });
+        } else {
+            alert('Geolocation is not supported by your browser.');
+            fivedayForecast('Mabalacat');
+            showWeather('Mabalacat');
+        }
+    }
+
+    async function fivedayForecastByCoordinates(lat, lon) {
+        const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (response.ok) {
+                const forecastContainer = document.querySelector('.forecast-container');
+                forecastContainer.innerHTML = '';
+
+                for (let i = 0; i < data.list.length; i += 8) {
+                    const forecast = data.list[i];
+                    const date = new Date(forecast.dt_txt);
+                    const day = date.toLocaleDateString('en-US', { weekday: 'long' });
+                    const temp = forecast.main.temp;
+                    const windSpeed = forecast.wind.speed;
+                    const weatherDescription = forecast.weather[0].description;
+
+                    const forecastEl = document.createElement('div');
+                    forecastEl.classList.add('forecast');
+                    forecastEl.innerHTML = `
+                        <p>${day}</p>
+                        <img src="https://openweathermap.org/img/wn/${forecast.weather[0].icon}.png" alt="Weather icon">
+                        <p>Wind: ${windSpeed} m/s</p>
+                        <p>${weatherDescription}</p>
+                        <p>Temperature: ${temp} °C</p>
+                    `;
+
+                    forecastContainer.appendChild(forecastEl);
+                }
+            } else {
+                alert('City not found');
+            }
+        } catch (error) {
+            console.error('Error fetching the weather data', error);
+        }
+    }
+
+    document.getElementById('search').addEventListener('click', () => {
+        const city = document.getElementById('search-box').value;
+        fivedayForecast(city);
+        showWeather(city);
+    });
+
+    // Initialize with device location or fallback to Mabalacat
+    getDeviceLocation();
+});

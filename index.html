@@ -1,49 +1,151 @@
 <!DOCTYPE html>
- 
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="app/style.css">
-    <link rel="stylesheet" href=
-"https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href=
-"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="stylesheet" href=
-"https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
-    <title>GFG App</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pluma News</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/logo_image.png" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 </head>
- 
 <body>
-    <div class="container">
-        <div class="weather-card">
-            <h1 style="color: rgb(16, 63, 133);">
-                Weather Tracker
-            </h1>
-            <h3>
-                Weather App
-            </h3>
-            <input type="text" id="city-input"
-                   placeholder="Enter city name">
-            <button id="city-input-btn"
-                    onclick="weatherFn($('#city-input').val())">
-                    Get Weather
-            </button>
-            <div id="weather-info"
-                 class="animate__animated animate__fadeIn">
-                <h3 id="city-name"></h3>
-                <p id="date"></p>
-                <img id="weather-icon" alt="Weather Icon">
-                <p id="temperature"></p>
-                <p id="description"></p>
-                <p id="wind-speed"></p>
+<nav class="sidebar close">
+    <header>
+        <div class="image-text">
+            <span class="image">
+                <img src="img/logo_image.png" alt="">
+            </span>
+
+            <div class="text logo-text">
+                <span class="name">Pluma News</span>    
+            </div>
+        </div>
+
+        <i class='bx bx-chevron-right toggle' style="background-color: red;"></i>
+    </header>
+
+    <div class="menu-bar">
+        <div class="menu">
+            <ul class="menu-links">
+                <li class="nav-link">
+                    <a href="#" data-page="1">
+                        <i class='bx bx-home-alt icon' ></i>
+                        <span class="text nav-text">Home</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#" data-page="2">
+                        <i class='bx bx-news icon' ></i>
+                        <span class="text nav-text">News</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#" data-page="3">
+                        <i class='bx bx-cloud icon'></i>
+                        <span class="text nav-text">Weather today</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#" data-page="4">
+                        <i class='bx bx-question-mark icon' ></i>
+                        <span class="text nav-text">Tentative API</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#" data-page="5">
+                        <i class='bx bx-heart icon' ></i>
+                        <span class="text nav-text">About Us</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="bottom-content">
+            <li class="mode">
+                <div class="sun-moon">
+                    <i class='bx bx-moon icon moon'></i>
+                    <i class='bx bx-sun icon sun'></i>
+                </div>
+                <span class="mode-text text">Dark mode</span>
+
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+            </li>
+        </div>
+    </div>
+</nav>
+
+<section class="home" id="page1">
+    <div class="text">
+
+        <div class="search-container">
+            <input type="search" placeholder="Enter Location..." id="search-box"></input>
+            <button type="submit" id="search" onclick="showWeather()">
+            <i class="fa fa-search" aria-hidden="true" ></i> 
+        </div>
+
+        <div class="widget1-container">
+            
+            <div class="widget1">
+                <p id="weather-info"></p>
+            </div>
+
+            <h1>5-day weather forecast</h1>
+            
+            <div class="widget2-container">
+                <div class="widget2">
+                    <img src="#" alt="img">
+            </div>
+            <div class="forecast-container">
+                <div class="forecast">
+                    <p id="forecast-info"></p>
+                </div>
+                <div class="forecast">
+                    <p id="forecast-info"></p>
+                </div>
+                <div class="forecast">
+                    <p id="forecast-info"></p>
+                </div>
+                <div class="forecast">
+                    <p id="forecast-info"></p>
+                </div>
+                <div class="forecast">
+                    <p id="forecast-info"></p>
+                </div>
             </div>
         </div>
     </div>
-    <script src=
-"https://code.jquery.com/jquery-3.6.0.min.js">
-    </script>
-    <script src=
-"https://momentjs.com/downloads/moment.min.js">
-    </script>
-    <script src="app/script.js"></script>
+</section>
+
+<section class="home" id="page2">
+    <div class="text">News</div>
+</section>
+
+<section class="home" id="page3">
+    <div class="text">Weather Today</div>
+</section>
+
+<section class="home" id="page4">
+    <div class="text">Tentative API</div>
+</section>
+
+<section class="home" id="page5">
+    <div class="text">About Us</div>
+</section>
+
+<script src="script.js"></script>
+
 </body>
- 
+
 </html>
