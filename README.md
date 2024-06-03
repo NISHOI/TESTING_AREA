@@ -5,7 +5,7 @@
   Our group consist of 
     <a href="https://github.com/FriedCreature">Mico Yumul</a>,&nbsp;
     <a href="https://github.com/NISHOI">Genyelle Rivera</a>,&nbsp;
-    <a href="https://www.facebook.com/mico.h.yumul/">Mico Yumul</a>,&nbsp;
-    <a href="https://www.facebook.com/mico.h.yumul/">Mico Yumul</a>
+    <a href="https://github.com/scars23">Charles Mendoza</a>,&nbsp;
+    <a href="https://github.com/simp4aze">Kenneth Chan</a>
   
 </p>
