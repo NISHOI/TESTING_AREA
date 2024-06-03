@@ -4,8 +4,8 @@
 <p align="center">
   Our group consist of 
     <a href="https://github.com/FriedCreature">Mico Yumul</a>,
-    <a href="https://www.facebook.com/mico.h.yumul/">Mico Yumul</a>,
+    <a href="https://www.facebook.com/mico.h.yumul/">Genyell Rivera</a>,&nbsp;
     <a href="https://www.facebook.com/mico.h.yumul/">Mico Yumul</a>,
     <a href="https://www.facebook.com/mico.h.yumul/">Mico Yumul</a>
-  "\t" Haahhaha
+  
 </p>
