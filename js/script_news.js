@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const apiKey = '0621a8d1e5094702bed155c2c447c897';
+    const apiKey = '244fb65f098b4611b60f67b272814fc2';
     const url = `https://newsapi.org/v2/everything?q=charles&from=2024-06-02&to=2024-06-03&apiKey=${apiKey}`;  // Add country parameter
 
     async function fetchNews() {
