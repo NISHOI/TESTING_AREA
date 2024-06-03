@@ -4,6 +4,5 @@
 <p align="center">
   Our group consist of 
     <a href="https://www.facebook.com/mico.h.yumul/">Mico Yumul</a>
-    <br>
     <a href="https://www.facebook.com/mico.h.yumul/">Mico Yumul</a>
 </p>
