@@ -4,7 +4,7 @@
 <p align="center">
   Our group consist of 
     <a href="https://github.com/FriedCreature">Mico Yumul</a>,&nbsp;
-    <a href="https://www.facebook.com/mico.h.yumul/">Genyelle Rivera</a>,&nbsp;
+    <a href="https://github.com/NISHOI">Genyelle Rivera</a>,&nbsp;
     <a href="https://www.facebook.com/mico.h.yumul/">Mico Yumul</a>,&nbsp;
     <a href="https://www.facebook.com/mico.h.yumul/">Mico Yumul</a>
   
