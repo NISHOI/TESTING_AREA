@@ -2,5 +2,6 @@
   Hi there! We are Group #
 </h3>
 <p align="center">
-  Our group consist of Genyelle, Kenneth, Charles and Mico!
+  Our group consist of 
+    <a href="https://www.facebook.com/mico.h.yumul/">Mico Yumul</a>
 </p>
